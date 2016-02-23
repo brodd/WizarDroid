@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import org.codepond.wizardroid.infrastructure.Bus;
+import org.codepond.wizardroid.infrastructure.events.NextButtonEnabledEvent;
 import org.codepond.wizardroid.infrastructure.events.StepCompletedEvent;
 import org.codepond.wizardroid.persistence.ContextVariable;
 
@@ -56,6 +57,14 @@ public abstract class WizardStep extends Fragment {
 	public final void notifyCompleted() {
 		Bus.getInstance().post(new StepCompletedEvent(true, this));
 	}
+
+    public final void enableNextButton() {
+        Bus.getInstance().post(new NextButtonEnabledEvent(true));
+    }
+
+    public final void disableNextButton() {
+        Bus.getInstance().post(new NextButtonEnabledEvent(false));
+    }
 
 	/**
 	 * Notify the wizard that this step is incomplete
