@@ -55,14 +55,11 @@ public class WizardFlow {
      * This method is designed to work directly with ViewPager.
 	 */
 	public List<Class<? extends WizardStep>> getSteps() {
-        List<Class<? extends WizardStep>> cutOffFlow = new ArrayList<Class<? extends WizardStep>>();
-
-        //Calculate the cut off step by finding the last step which is required and incomplete
+        List<Class<? extends WizardStep>> steps = new ArrayList<Class<? extends WizardStep>>();
         for (StepMetaData stepMetaData : this.steps) {
-            cutOffFlow.add(stepMetaData.getStepClass());
-            if (!stepMetaData.isCompleted() && stepMetaData.isRequired()) break;
+            steps.add(stepMetaData.getStepClass());
         }
-        return cutOffFlow;
+        return steps;
 	}
 
     /**

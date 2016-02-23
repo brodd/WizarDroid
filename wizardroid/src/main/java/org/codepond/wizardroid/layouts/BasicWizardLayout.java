@@ -100,6 +100,10 @@ public abstract class BasicWizardLayout extends WizardFragment implements View.O
     @Override
     public void onStepChanged() {
 		super.onStepChanged();
+    }
+
+    @Override
+    public void onStepCompleted() {
         updateWizardControls();
     }
 

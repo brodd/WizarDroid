@@ -59,7 +59,7 @@ public abstract class WizardFragment extends Fragment implements Wizard.WizardCa
             focusedWindowChild = new View(getActivity());
         mgr.hideSoftInputFromWindow(focusedWindowChild.getWindowToken(), 0);
     }
-    
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

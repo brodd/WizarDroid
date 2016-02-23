@@ -37,6 +37,8 @@ public class Wizard implements Disposable, Subscriber {
          * Event called after a step was changed
          */
         public void onStepChanged();
+
+        void onStepCompleted();
     }
 
 	private static final boolean DEBUG = false;
@@ -155,9 +157,8 @@ public class Wizard implements Disposable, Subscriber {
         // Check that the step is not already in this state to avoid spamming the viewpager
         if (wizardFlow.isStepCompleted(stepPosition) != isComplete) {
             wizardFlow.setStepCompleted(stepPosition, isComplete);
-            mPager.getAdapter().notifyDataSetChanged();
             //Refresh the UI
-            callbacks.onStepChanged();
+            callbacks.onStepCompleted();
         }
     }
 
@@ -181,6 +182,7 @@ public class Wizard implements Disposable, Subscriber {
 				mPreviousStep = getCurrentStep();
 				setCurrentStep(mPager.getCurrentItem() + 1);
 			}
+            callbacks.onStepChanged();
 		}
     }
 
@@ -190,6 +192,7 @@ public class Wizard implements Disposable, Subscriber {
 	public void goBack() {
 		if (!isFirstStep()) {
 			setCurrentStep(mPager.getCurrentItem() - 1);
+            callbacks.onStepChanged();
 		}
 	}
 	
