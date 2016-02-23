@@ -7,9 +7,6 @@ import android.widget.Button;
 
 import org.codepond.wizardroid.R;
 import org.codepond.wizardroid.WizardFragment;
-import org.codepond.wizardroid.infrastructure.Bus;
-import org.codepond.wizardroid.infrastructure.Subscriber;
-import org.codepond.wizardroid.infrastructure.events.NextButtonEnabledEvent;
 import org.codepond.wizardroid.persistence.ContextManager;
 
 /**
@@ -24,7 +21,7 @@ import org.codepond.wizardroid.persistence.ContextManager;
  * {@link #setFinishButtonText(String)}.
 
  */
-public abstract class BasicWizardLayout extends WizardFragment implements View.OnClickListener, Subscriber {
+public abstract class BasicWizardLayout extends WizardFragment implements View.OnClickListener {
 
     private Button nextButton;
     private Button previousButton;
@@ -39,26 +36,13 @@ public abstract class BasicWizardLayout extends WizardFragment implements View.O
      */
     public BasicWizardLayout() {
         super();
-        init();
     }
 
 	public BasicWizardLayout(ContextManager contextManager) {
 		super(contextManager);
-        init();
 	}
 
-    private void init() {
-        Bus.getInstance().register(this, NextButtonEnabledEvent.class);
-    }
-
-    @Override
-    public void receive(Object event) {
-        if (event instanceof NextButtonEnabledEvent) {
-            nextButton.setEnabled(((NextButtonEnabledEvent)event).getEnabled());
-        }
-    }
-
-    /**
+	/**
      * Setting the layout for this basic wizard layout and hooking up wizard controls to their
      * OnClickListeners.
      */
