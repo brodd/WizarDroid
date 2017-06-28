@@ -120,7 +120,8 @@ public class Wizard implements Disposable, Subscriber {
                         callbacks.onStepCompleted();
 						break;
 					case ViewPager.SCROLL_STATE_IDLE:
-						if (mPreviousState == ViewPager.SCROLL_STATE_SETTLING) {
+					    // mPreviousStep might me null when restoring from a saved instance state
+						if (mPreviousState == ViewPager.SCROLL_STATE_SETTLING && mPreviousStep != null) {
 							if (getCurrentStepPosition() > mPreviousPosition) {
 								if (DEBUG) Log.v(TAG, "goNext");
 								processStepBeforeChange(mPreviousStep, mPreviousPosition);
