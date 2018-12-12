@@ -100,7 +100,7 @@ public class Wizard implements Disposable, Subscriber {
             @Override
             public void onPageSelected(int position) {
                 if (backStackEntryCount < position){
-                    mFragmentManager.beginTransaction().addToBackStack(null).commit();
+                    mFragmentManager.beginTransaction().addToBackStack(null).commitAllowingStateLoss();
                 }
                 else if (backStackEntryCount > position){
                     mFragmentManager.popBackStack();
